@@ -24,15 +24,19 @@ def main():
 
     # Holds the shortest paths from each starting vertex to every other vertex
     shortest_paths = []
+    # Hard coding starting vertex to 0 to only test 1 starting point
+    starting_vertex = 0
+    # for starting_vertex in range(0, len(adjacency_matrix)):
+    # If the Bellman-Ford runs into a negative cycle it will return False and exit the program
+    valid_cycle = bellman_ford(adjacency_matrix, starting_vertex, offset)
+    if (valid_cycle):
+        shortest_paths.append(valid_cycle)
+    else:
+        exit(-1)
 
-    for starting_vertex in range(0, len(adjacency_matrix)):
-        # If the Bellman-Ford runs into a negative cycle it will return False and exit the program
-        valid_cycle = bellman_ford(adjacency_matrix, starting_vertex, offset)
-        if (valid_cycle):
-            shortest_paths.append(valid_cycle)
-        else:
-            exit(-1)
-
+    # Single print for now
+    # shortest_paths will only contains the paths starting from A
+    print(shortest_paths)
     print_paths(shortest_paths, cities)
 
 # Prints the paths from the cities in the desired format
